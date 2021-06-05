@@ -1,0 +1,47 @@
+{
+    "name": "norman-huth/muetze-site",
+    "description": "Always used Laravel resources",
+    "keywords": [
+        "laravel",
+        "commands",
+        "stubs",
+        "translation",
+        "many-to-many",
+        "nova",
+        "laravel-nova",
+        "laravel-package",
+        "laravel-many-to-many",
+        "laravel-column-enceyption",
+        "laravel-translation",
+        "laravel-pivot-table",
+        "laravel-command",
+        "laravel-pivot-table-command"
+    ],
+    "type": "laravel-package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Norman Huth",
+            "email": "norman@huth.it"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/console": "^7.0|^8.0",
+        "illuminate/support": "^7.0|^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "NormanHuth\\Muetze\\": "src"
+        },
+        "files": ["Helpers/functions.php"]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "NormanHuth\\Muetze\\SiteServiceProvider"
+            ]
+        }
+    }
+}
