@@ -6,6 +6,7 @@ namespace NormanHuth\Muetze;
 use Illuminate\Support\ServiceProvider;
 use NormanHuth\Muetze\Commands\MigrateMakeCommand;
 use NormanHuth\Muetze\Commands\ModelMakeCommand;
+use NormanHuth\Muetze\App\View\Components\Markdown;
 
 class SiteServiceProvider extends ServiceProvider
 {
@@ -35,11 +36,33 @@ class SiteServiceProvider extends ServiceProvider
         $locationTarget = $locationPath.'/'.app()->getLocale().'.json';
 
         $this->publishes([
-            __DIR__.'/../resources/lang/de.json' => $locationTarget,
+            __DIR__.'/../resources/lang/en.json' => $locationTarget,
         ], 'translations');
 
         if (file_exists($locationTarget)) {
             $this->loadJSONTranslationsFrom($locationPath);
         }
+
+        $this->loadViewComponentsAs('site', [
+            Markdown::class,
+        ]);
+
+//        Blade::directive('markdown', function ($expression) {
+//            $data = explode(',',$expression);
+//            $data = array_map('trim', $data);
+//            $markdown = $data[0];
+//            $leftTrim = $data[1] ?? 'true';
+//
+/*            return "<?php echo parseMarkdown($markdown, $leftTrim == 'true'); ?>";*/
+//        });
+//
+//        Blade::directive('markdownFile', function ($expression) {
+//            $data = explode(',',$expression);
+//            $data = array_map('trim', $data);
+//            $markdown = $data[0];
+//            $leftTrim = $data[1] ?? 'true';
+//
+/*            return "<?php echo parseMarkdownFile($markdown, $leftTrim == 'true'); ?>";*/
+//        });
     }
 }

@@ -2,10 +2,10 @@
 
 if (!function_exists('array_keys_merge')) {
     /**
-     * @param $array
+     * @param array $array
      * @return array
      */
-    function array_keys_merge($array): array
+    function array_keys_merge(array $array): array
     {
         $result = [];
         foreach ($array as $value) {
@@ -45,7 +45,7 @@ if (!function_exists('getClientIp')) {
                 return request()->server($k);
             }
         }
-        return 'UNKNOWN';
+        return 'Unknown';
     }
 }
 
@@ -208,12 +208,85 @@ if (!function_exists('_asset')) {
 
 if (!function_exists('parseMarkdown')) {
     /**
-     * @param $markdown
+     * @param string $markdown
+     * @param bool $leftTrim
      * @return \Illuminate\Support\HtmlString
      */
-    function parseMarkdown($markdown): \Illuminate\Support\HtmlString
+    function parseMarkdown(string $markdown, bool $leftTrim = true): \Illuminate\Support\HtmlString
     {
+        if ($leftTrim) {
+            $markdown = textLtrim($markdown);
+        }
+
         return \Illuminate\Mail\Markdown::parse($markdown);
+    }
+}
+
+if (!function_exists('parseMarkdownFile')) {
+    /**
+     * @param $file
+     * @param bool $leftTrim
+     * @return \Illuminate\Support\HtmlString
+     */
+    function parseMarkdownFile($file, bool $leftTrim = true): \Illuminate\Support\HtmlString
+    {
+        $markdown = file_get_contents($file);
+
+        return parseMarkdown($markdown, $leftTrim);
+    }
+}
+
+if (!function_exists('textTrim')) {
+    /**
+     * Strip whitespace (or other characters) from the beginning and end in each line of a string
+     *
+     * @param string $string
+     * @param bool $trim
+     * @return string
+     */
+    function textTrim(string $string, bool $trim = true): string
+    {
+        if ($trim) {
+            $string = trim($string);
+        }
+
+        return implode("\n", array_map('trim', explode("\n", $string)));
+    }
+}
+
+if (!function_exists('textLtrim')) {
+    /**
+     * Strip whitespace (or other characters) from the beginning in each line of a string
+     *
+     * @param string $string
+     * @param bool $trim
+     * @return string
+     */
+    function textLtrim(string $string, bool $trim = true): string
+    {
+        if ($trim) {
+            $string = trim($string);
+        }
+
+        return implode("\n", array_map('ltrim', explode("\n", trim($string))));
+    }
+}
+
+if (!function_exists('textRtrim')) {
+    /**
+     * Strip whitespace (or other characters) from the end in each line of a string
+     *
+     * @param string $string
+     * @param bool $trim
+     * @return string
+     */
+    function textRtrim(string $string, bool $trim = true): string
+    {
+        if ($trim) {
+            $string = trim($string);
+        }
+
+        return implode("\n", array_map('rtrim', explode("\n", trim($string))));
     }
 }
 
@@ -274,7 +347,7 @@ if (!function_exists('randFloat')) {
      * @param int $decimals
      * @return float
      */
-    function randFloat($min = 1, $max = 100, $decimals = 2): float
+    function randFloat(int $min = 1, int $max = 100, int $decimals = 2): float
     {
         if ($min > $max) {
             $workMin = $max;

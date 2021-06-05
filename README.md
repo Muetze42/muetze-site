@@ -51,6 +51,30 @@ class UserData extends Model
 }
 ```
 ---
+### Blade Components
+#### Markdown
+Parse markdown
+``` html
+<x-site-markdown>
+    {{ $markdown }}
+</x-site-markdown>
+```
+Parse markdown without stripping whitespace (or other characters) from the beginning in each line of a string
+``` html
+<x-site-markdown :trim="false">
+    {{ $markdown }}
+</x-site-markdown>
+```
+Parse Markdown file
+``` html
+<x-site-markdown :file="$markdown" />
+
+<!-- Don't forget the single quotes (:file) -->
+<x-site-markdown :trim="false" :file="'/path/to/file.md'" />
+
+<x-site-markdown :file="resource_path('views/markdowns/content.md')" :trim="false" />
+```
+---
 ### Publish
 #### Improved Laravel Migration Stubs
 No more problem with duplicate class names
