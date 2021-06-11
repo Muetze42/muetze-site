@@ -15,10 +15,12 @@ class MigrateMakeCommand extends GeneratorCommand
      * @var string
      */
     protected $signature = 'make:migration:pivot
-                            {model1 : The First Model}
-                            {model2 : The Second Model}
+                            {model1 : The first Model}
+                            {model2 : The second Model}
                             {--path= : The location where the migration file should be created}
-                            {--filename= : The file name with which the migration should be created}';
+                            {--filename= : The file name with which the migration should be created}
+                            {--id1= : The id column name of the first model}
+                            {--id2= : The id column name of the second model}';
 
     /**
      * The console command description.
@@ -37,7 +39,7 @@ class MigrateMakeCommand extends GeneratorCommand
     /**
      * The Composer instance.
      *
-     * @var \Illuminate\Support\Composer
+     * @var Composer
      */
     protected Composer $composer;
 
@@ -48,6 +50,8 @@ class MigrateMakeCommand extends GeneratorCommand
     protected string $table1;
     protected string $snake0;
     protected string $snake1;
+    protected string $id1column;
+    protected string $id2column;
 
     /**
      * Execute the console command.
@@ -73,6 +77,9 @@ class MigrateMakeCommand extends GeneratorCommand
         $this->table = $this->snake0.'_'.$this->snake1;
 
         $this->filename = $this->option('filename') ?? now()->format('Y_m_d_His').'_create_'.$this->table.'_pivot_table';
+
+        $this->id1column = $this->option('id1') ?? 'id';
+        $this->id2column = $this->option('id2') ?? 'id';
 
         $path = $this->getFullPath();
 
@@ -128,6 +135,8 @@ class MigrateMakeCommand extends GeneratorCommand
             '{{snake1}}' => $this->snake1,
             '{{table0}}' => $this->table0,
             '{{table1}}' => $this->table1,
+            '{{id1column}}' => $this->id1column,
+            '{{id2column}}' => $this->id2column,
         ];
 
         $stub = str_replace(array_keys($replaces), array_values($replaces), $stub);
