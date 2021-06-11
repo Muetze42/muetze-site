@@ -14,13 +14,19 @@ The 2 models of the relationship must be specified in the command.
 php artisan make:migration:pivot User Role
 ```
 
-#### Create Model And Nova Ressource
+#### make:bundle Command
+Create a model with a migration and policy  
+(The default can be adjusted in config.)
 ``` bash
-php artisan nova:model Foo
+php artisan make:bundle Foo
 ```
-Create with migration and policy
+Create with options to create resources disabled by config anyway.
 ``` bash
-php artisan nova:model Foo --m --p
+// {--n : create with nova ressource}
+// {--m : create with migration}
+// {--p : create with policy}
+// {--r : create with resource}
+php artisan make:bundle Foo --n --m --p --r
 ```
 ---
 ### Traits
@@ -76,6 +82,20 @@ Parse Markdown file
 ```
 ---
 ### Publish
+#### Config file
+Change the default details of the make:bundle command
+``` bash
+php artisan vendor:publish --provider="NormanHuth\Muetze\SiteServiceProvider" --tag="config"
+```
+Default:
+``` php
+    'make-bundle' => [
+        'nova-ressource' => false,
+        'migration'      => true,
+        'policy'         => true,
+        'resource'       => false,
+    ],
+```
 #### Improved Laravel Migration Stubs
 No more problem with duplicate class names
 ``` bash

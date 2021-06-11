@@ -39,6 +39,10 @@ class SiteServiceProvider extends ServiceProvider
             __DIR__.'/../resources/lang/en.json' => $locationTarget,
         ], 'translations');
 
+        $this->publishes([
+            __DIR__.'/../config/muetze-site.php' => config_path('muetze-site.php'),
+        ], 'config');
+
         if (file_exists($locationTarget)) {
             $this->loadJSONTranslationsFrom($locationPath);
         }

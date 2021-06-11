@@ -3,6 +3,7 @@
 namespace NormanHuth\Muetze\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class ModelMakeCommand extends Command
@@ -12,9 +13,11 @@ class ModelMakeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'nova:model {name}
+    protected $signature = 'make:bundle {name}
+                            {--n : create with nova ressource}
                             {--m : create with migration}
-                            {--p : create with policy}';
+                            {--p : create with policy}
+                            {--r : create with resource}';
 
     /**
      * The console command description.
@@ -30,8 +33,10 @@ class ModelMakeCommand extends Command
      */
     public function handle(): int
     {
-        $migration = $this->option('m');
-        $policy = $this->option('p');
+        $migration = $this->option('m') || config('muetze-site.make-bundle.migration');
+        $policy = $this->option('p') || config('muetze-site.make-bundle.policy');
+        $nova = $this->option('n') || config('muetze-site.make-bundle.nova-ressource');
+        $ressource = $this->option('r') || config('muetze-site.make-bundle.resource');
 
         $name = $this->argument('name');
         $model = ucfirst(Str::singular($name));
@@ -50,16 +55,24 @@ class ModelMakeCommand extends Command
             ]);
         }
 
-        $this->line(__('Create nova resource: :model', ['model' => $model]));
-        $this->call('nova:resource', [
-            'name' => $model,
-        ]);
+        if ($nova) {
+            $this->line(__('Create nova resource: :model', ['model' => $model]));
+            $this->call('nova:resource', [
+                'name' => $model,
+            ]);
+        }
+
+        if ($ressource) {
+            $this->line(__('Create resource: :model', ['model' => $model]));
+            $this->call('make:resource', [
+                'name' => $model,
+            ]);
+        }
 
         if ($migration) {
             $this->line(__('Create migration: :table', ['table' => $table]));
             $this->call('make:migration', [
-                'name' => sprintf('create_%s_table', $table),
-                '--create' => $table,
+                'name' => $model.'Resource',
             ]);
         }
 
