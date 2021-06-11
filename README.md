@@ -13,6 +13,10 @@ The 2 models of the relationship must be specified in the command.
 ``` bash
 php artisan make:migration:pivot User Role
 ```
+Option if one or both primary column names are not `id`
+``` bash
+php artisan make:migration:pivot User Role --id1=uui --id2=foo_bar
+```
 
 #### make:bundle Command
 Create a model with a migration and policy  
