@@ -72,7 +72,7 @@ class ModelMakeCommand extends Command
         if ($migration) {
             $this->line(__('Create migration: :table', ['table' => $table]));
             $this->call('make:migration', [
-                'name' => $model.'Resource',
+                'name' => 'create_'.$table.'_table',
             ]);
         }
 
