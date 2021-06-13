@@ -73,6 +73,7 @@ class ModelMakeCommand extends Command
             $this->line(__('Create migration: :table', ['table' => $table]));
             $this->call('make:migration', [
                 'name' => 'create_'.$table.'_table',
+                '--create' => $table,
             ]);
         }
 
