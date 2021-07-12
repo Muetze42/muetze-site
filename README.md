@@ -30,6 +30,8 @@ Create with options to create resources disabled by config anyway.
 // {--m : create with migration}
 // {--p : create with policy}
 // {--r : create with resource}
+// {--c : create with controller}
+// {--a : create with api controller}
 php artisan make:bundle Foo --n --m --p --r
 ```
 ---
