@@ -17,7 +17,9 @@ class ModelMakeCommand extends Command
                             {--n : create with nova ressource}
                             {--m : create with migration}
                             {--p : create with policy}
-                            {--r : create with resource}';
+                            {--r : create with resource}
+                            {--c : create with controller}
+                            {--a : create with api controller}';
 
     /**
      * The console command description.
@@ -33,10 +35,12 @@ class ModelMakeCommand extends Command
      */
     public function handle(): int
     {
-        $migration = $this->option('m') || config('muetze-site.make-bundle.migration');
-        $policy = $this->option('p') || config('muetze-site.make-bundle.policy');
-        $nova = $this->option('n') || config('muetze-site.make-bundle.nova-ressource');
-        $ressource = $this->option('r') || config('muetze-site.make-bundle.resource');
+        $migration = $this->option('m') || config('muetze-site.make-bundle.migration', true);
+        $policy = $this->option('p') || config('muetze-site.make-bundle.policy', true);
+        $ressource = $this->option('r') || config('muetze-site.make-bundle.resource', true);
+        $nova = $this->option('n') || config('muetze-site.make-bundle.nova-ressource', false);
+        $controller = $this->option('c') || config('muetze-site.make-bundle.controller', false);
+        $apiController = $this->option('a') || config('muetze-site.make-bundle.api-controller', false);
 
         $name = $this->argument('name');
         $model = ucfirst(Str::singular($name));
@@ -65,7 +69,24 @@ class ModelMakeCommand extends Command
         if ($ressource) {
             $this->line(__('Create resource: :model', ['model' => $model]));
             $this->call('make:resource', [
-                'name' => $model,
+                'name' => $model.'Resource',
+            ]);
+        }
+
+        if ($controller) {
+            $this->line(__('Create controller: :model', ['model' => $model]));
+            $this->call('make:controller', [
+                'name' => config('muetze-site.make-bundle.namespaces.controller').$model.'Controller',
+                '--resource' => true,
+            ]);
+        }
+
+        if ($apiController) {
+            $this->line(__('Create API controller: :model', ['model' => $model]));
+            $this->call('make:controller', [
+                'name' => config('muetze-site.make-bundle.namespaces.api-controller').$model.'Controller',
+                '--api' => true,
+                '--resource' => true,
             ]);
         }
 
