@@ -13,6 +13,13 @@ return [
         'nova-ressource' => false,
         'migration'      => true,
         'policy'         => true,
-        'resource'       => false,
+        'resource'       => true,
+        'controller'     => false,
+        'api-controller' => false,
+
+        'namespaces' => [
+            'controller'     => 'Web/',
+            'api-controller' => 'Api/',
+        ],
     ],
 ];

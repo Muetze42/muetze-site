@@ -97,10 +97,17 @@ Default:
         'nova-ressource' => false,
         'migration'      => true,
         'policy'         => true,
-        'resource'       => false,
+        'resource'       => true,
+        'controller'     => false,
+        'api-controller' => false,
+
+        'namespaces' => [
+            'controller'     => 'Web/',
+            'api-controller' => 'Api/',
+        ],
     ],
 ```
-#### Improved Laravel Migration Stubs
+#### Improved Laravel Stubs
 No more problem with duplicate class names
 ``` bash
 php artisan vendor:publish --provider="NormanHuth\Muetze\SiteServiceProvider" --tag="laravel-stubs"
