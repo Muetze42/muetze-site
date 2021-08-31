@@ -16,23 +16,6 @@ if (!function_exists('array_keys_merge')) {
     }
 }
 
-if (!function_exists('slug')) {
-    /**
-     * @param string $title
-     * @param string $separator
-     * @param string $language
-     * @return string
-     */
-    function slug(string $title, string $separator = '-', string $language = ''): string
-    {
-        if (!$language) {
-            $language = config('app.locale', 'en');
-        }
-
-        return \Illuminate\Support\Str::slug($title, $separator, $language);
-    }
-}
-
 if (!function_exists('getClientIp')) {
     /**
      * @return string
@@ -365,45 +348,22 @@ if (!function_exists('randFloat')) {
     }
 }
 
-if (!function_exists('explodeDelimiter2')) {
+if (!function_exists('listWithAnd')) {
     /**
-     * Creates an array of single words
-     *
-     * @param $string
-     * @param string $separator
-     * @return array
-     */
-    function explodeDelimiter2($string, string $separator = ' '): array
-    {
-        return array_map(
-            function ($value) use ($separator) {
-                return implode($separator, $value);
-            },
-            array_chunk(explode($separator, $string), 2)
-        );
-    }
-}
-
-if (!function_exists('andWordReplace')) {
-    /**
-     * Replaces the last comma in an enumeration with the word "and".
-     *
-     * @param $string
+     * @param array|string $content
      * @param string $word
      * @param string $glue
      * @return string
      */
-    function andWordReplace($string, string $word = '', string $glue = ','): string
+    function listWithAnd(array|string $content, string $word = 'and', string $glue = ','): string
     {
-        if (!$word) {
-            $locale = config('app.locale');
-            if ($locale == 'de' || $locale == 'de_DE') {
-                $word = 'und';
-            } else {
-                $word = __('and');
-            }
+        if (is_array($content)) {
+            $content = implode(', ', $content);
         }
 
-        return substr_replace($string, ' '.$word, strrpos($string, $glue), 1);
+        if (!preg_match('/,/', $content)) {
+            return $content;
+        }
+        return substr_replace($content, ' '.__($word), strrpos($content, $glue), 1);
     }
 }

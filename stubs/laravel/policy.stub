@@ -14,11 +14,11 @@ class {{ class }}
      * Determine whether the user can view any models.
      *
      * @param {{ user }} $user
-     * @return mixed
+     * @return bool
      */
-    public function viewAny({{ user }} $user): mixed
+    public function viewAny({{ user }} $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -26,22 +26,22 @@ class {{ class }}
      *
      * @param {{ user }} $user
      * @param {{ model }} ${{ modelVariable }}
-     * @return mixed
+     * @return bool
      */
-    public function view({{ user }} $user, {{ model }} ${{ modelVariable }}): mixed
+    public function view({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
     {
-        //
+        return true;
     }
 
     /**
      * Determine whether the user can create models.
      *
      * @param {{ user }} $user
-     * @return mixed
+     * @return bool
      */
-    public function create({{ user }} $user): mixed
+    public function create({{ user }} $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -49,11 +49,11 @@ class {{ class }}
      *
      * @param {{ user }} $user
      * @param {{ model }} ${{ modelVariable }}
-     * @return mixed
+     * @return bool
      */
-    public function update({{ user }} $user, {{ model }} ${{ modelVariable }}): mixed
+    public function update({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,11 +61,11 @@ class {{ class }}
      *
      * @param {{ user }} $user
      * @param {{ model }} ${{ modelVariable }}
-     * @return mixed
+     * @return bool
      */
-    public function delete({{ user }} $user, {{ model }} ${{ modelVariable }}): mixed
+    public function delete({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -73,11 +73,11 @@ class {{ class }}
      *
      * @param {{ user }} $user
      * @param {{ model }} ${{ modelVariable }}
-     * @return mixed
+     * @return bool
      */
-    public function restore({{ user }} $user, {{ model }} ${{ modelVariable }}): mixed
+    public function restore({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -85,10 +85,10 @@ class {{ class }}
      *
      * @param {{ user }} $user
      * @param {{ model }} ${{ modelVariable }}
-     * @return mixed
+     * @return bool
      */
-    public function forceDelete({{ user }} $user, {{ model }} ${{ modelVariable }}): mixed
+    public function forceDelete({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
     {
-        //
+        return true;
     }
 }

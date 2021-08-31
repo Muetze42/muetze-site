@@ -5,6 +5,7 @@ namespace {{ namespace }};
 use {{ namespacedModel }};
 use {{ rootNamespace }}Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use {{ namespacedParentModel }};
 use Illuminate\Http\Response;
 
 class {{ class }} extends Controller
@@ -12,19 +13,10 @@ class {{ class }} extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param {{ parentModel }} ${{ parentModelVariable }}
      * @return Response
      */
-    public function index(): Response
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create(): Response
+    public function index({{ parentModel }} ${{ parentModelVariable }}): Response
     {
         //
     }
@@ -33,9 +25,10 @@ class {{ class }} extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
+     * @param {{ parentModel }} ${{ parentModelVariable }}
      * @return Response
      */
-    public function store(Request $request): Response
+    public function store(Request $request, {{ parentModel }} ${{ parentModelVariable }}): Response
     {
         //
     }
@@ -43,21 +36,11 @@ class {{ class }} extends Controller
     /**
      * Display the specified resource.
      *
+     * @param {{ parentModel }} ${{ parentModelVariable }}
      * @param {{ model }} ${{ modelVariable }}
      * @return Response
      */
-    public function show({{ model }} ${{ modelVariable }}): Response
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  {{ model }} ${{ modelVariable }}
-     * @return Response
-     */
-    public function edit({{ model }} ${{ modelVariable }}): Response
+    public function show({{ parentModel }} ${{ parentModelVariable }}, {{ model }} ${{ modelVariable }}): Response
     {
         //
     }
@@ -66,10 +49,11 @@ class {{ class }} extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
+     * @param {{ parentModel }} ${{ parentModelVariable }}
      * @param {{ model }} ${{ modelVariable }}
      * @return Response
      */
-    public function update(Request $request, {{ model }} ${{ modelVariable }}): Response
+    public function update(Request $request, {{ parentModel }} ${{ parentModelVariable }}, {{ model }} ${{ modelVariable }}): Response
     {
         //
     }
@@ -77,10 +61,11 @@ class {{ class }} extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param {{ parentModel }} ${{ parentModelVariable }}
      * @param {{ model }} ${{ modelVariable }}
      * @return Response
      */
-    public function destroy({{ model }} ${{ modelVariable }}): Response
+    public function destroy({{ parentModel }} ${{ parentModelVariable }}, {{ model }} ${{ modelVariable }}): Response
     {
         //
     }
