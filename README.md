@@ -27,7 +27,7 @@ php artisan make:bundle Foo
 ```
 Create with options to create resources disabled by config anyway.
 ``` bash
-// {--n : create with nova ressource}
+// {--n : create with nova resource}
 // {--m : create with migration}
 // {--p : create with policy}
 // {--r : create with resource}
@@ -42,7 +42,7 @@ php artisan vendor:publish --provider="NormanHuth\Muetze\SiteServiceProvider" --
 Default:
 ``` php
     'make-bundle' => [
-        'nova-ressource' => false,
+        'nova-resource' => false,
         'migration'      => true,
         'policy'         => true,
         'resource'       => true,

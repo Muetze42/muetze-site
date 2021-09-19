@@ -14,7 +14,7 @@ class ModelMakeCommand extends Command
      * @var string
      */
     protected $signature = 'make:bundle {name}
-                            {--n : create with nova ressource}
+                            {--n : create with nova resource}
                             {--m : create with migration}
                             {--p : create with policy}
                             {--r : create with resource}
@@ -37,8 +37,8 @@ class ModelMakeCommand extends Command
     {
         $migration = $this->option('m') || config('muetze-site.make-bundle.migration', true);
         $policy = $this->option('p') || config('muetze-site.make-bundle.policy', true);
-        $ressource = $this->option('r') || config('muetze-site.make-bundle.resource', true);
-        $nova = $this->option('n') || config('muetze-site.make-bundle.nova-ressource', false);
+        $resource = $this->option('r') || config('muetze-site.make-bundle.resource', true);
+        $nova = $this->option('n') || config('muetze-site.make-bundle.nova-resource', false);
         $controller = $this->option('c') || config('muetze-site.make-bundle.controller', false);
         $apiController = $this->option('a') || config('muetze-site.make-bundle.api-controller', false);
 
@@ -66,7 +66,7 @@ class ModelMakeCommand extends Command
             ]);
         }
 
-        if ($ressource) {
+        if ($resource) {
             $this->line(__('Create resource: :model', ['model' => $model]));
             $this->call('make:resource', [
                 'name' => $model.'Resource',

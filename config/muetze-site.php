@@ -10,7 +10,7 @@ return [
     |
     */
     'make-bundle' => [
-        'nova-ressource' => false,
+        'nova-resource' => false,
         'migration'      => true,
         'policy'         => true,
         'resource'       => true,
